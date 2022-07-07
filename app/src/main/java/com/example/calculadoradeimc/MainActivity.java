@@ -1,8 +1,11 @@
 package com.example.calculadoradeimc;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.example.calculadoradeimc.databinding.ActivityMainBinding;
@@ -52,5 +55,25 @@ public class MainActivity extends AppCompatActivity {
             binding.txtResultado.setText("Obesidade Mórbida (Grau III): \n" + "IMC: " + imc);
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        int itemId = item.getItemId();
+
+        if (itemId == R.id.ic_limpar) {
+            binding.edtPeso.setText("");
+            binding.edtAltura.setText("");
+            binding.txtResultado.setText("");
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 }
