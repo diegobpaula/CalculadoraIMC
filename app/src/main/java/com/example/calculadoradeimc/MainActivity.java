@@ -10,6 +10,8 @@ import android.view.View;
 
 import com.example.calculadoradeimc.databinding.ActivityMainBinding;
 
+import java.text.DecimalFormat;
+
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
@@ -38,21 +40,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void calcularImc() {
-        float peso = Float.parseFloat(binding.edtPeso.getText().toString());
-        float altura = Float.parseFloat(binding.edtAltura.getText().toString());
+        float peso = Float.parseFloat(binding.edtPeso.getText().toString().replace(",","."));
+        float altura = Float.parseFloat(binding.edtAltura.getText().toString().replace(",","."));
         float imc = peso / (altura * altura);
+
+        DecimalFormat format =  new DecimalFormat("0.00");
         if (imc < 18.5) {
-            binding.txtResultado.setText("Peso BAIXO: \n" + "IMC: " + imc);
+            binding.txtResultado.setText("Peso BAIXO: \n" + "IMC: " + format.format(imc));
         } else if (imc >= 18.5 && imc <= 24.9) {
-            binding.txtResultado.setText("Peso Normal: \n" + "IMC: " + imc);
+            binding.txtResultado.setText("Peso Normal: \n" + "IMC: " + format.format(imc));
         } else if (imc >= 25.0 && imc <= 29.9) {
-            binding.txtResultado.setText("Sobrepeso: \n" + "IMC: " + imc);
+            binding.txtResultado.setText("Sobrepeso: \n" + "IMC: " + format.format(imc));
         } else if (imc >= 30.0 && imc <= 34.9) {
-            binding.txtResultado.setText("Obesidade (Grau I): \n" + "IMC: " + imc);
+            binding.txtResultado.setText("Obesidade (Grau I): \n" + "IMC: " + format.format(imc));
         } else if (imc >= 35.0 && imc <= 39.9) {
-            binding.txtResultado.setText("Obesidade Severa (Grau II): \n" + "IMC: " + imc);
+            binding.txtResultado.setText("Obesidade Severa (Grau II): \n" + "IMC: " + format.format(imc));
         } else {
-            binding.txtResultado.setText("Obesidade Mórbida (Grau III): \n" + "IMC: " + imc);
+            binding.txtResultado.setText("Obesidade Mórbida (Grau III): \n" + "IMC: " + format.format(imc));
         }
 
     }
